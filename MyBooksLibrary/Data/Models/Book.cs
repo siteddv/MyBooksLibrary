@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DataLayer.Models
+namespace MyBooksLibrary.Data.Models
 {
     class Book
     {
