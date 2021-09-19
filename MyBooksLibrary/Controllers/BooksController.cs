@@ -25,8 +25,8 @@ namespace MyBooksLibrary.Controllers
         [HttpGet("get-book-by-id/{id}")]
         public IActionResult GetBookById(int id)
         {
-            var allBooks = _booksService.GetBookById(id);
-            return Ok(allBooks);
+            var book = _booksService.GetBookById(id);
+            return Ok(book);
         }
 
         [HttpPost("add-book")]
@@ -36,5 +36,11 @@ namespace MyBooksLibrary.Controllers
             return Ok();
         }
 
+        [HttpPut]
+        public IActionResult UpdateBookById(int id, [FromBody]BookViewModel book)
+        {
+            var updatedBook = _booksService.UpdateBookById(id, book);
+            return Ok(updatedBook);
+        }
     }
 }
