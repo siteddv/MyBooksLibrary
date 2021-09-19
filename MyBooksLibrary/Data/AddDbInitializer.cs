@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace MyBooksLibrary.Data
 {
-    public class AddDbInitializer
+    public static class AddDbInitializer
     {
         public static void Seed(IApplicationBuilder applicationBuilder)
         {
@@ -23,6 +23,7 @@ namespace MyBooksLibrary.Data
                         IsRead = true,
                         DateRead = DateTime.Now.AddDays(-10),
                         Rate = 4,
+                        Author = "Author",
                         Genre = "Biography",
                         CoverUrl = "https....",
                         DateAdded = DateTime.Now
@@ -32,6 +33,7 @@ namespace MyBooksLibrary.Data
                         Title = "2nd Book Title",
                         Description = "2nd Book Description",
                         IsRead = false,
+                        Author = "Author",
                         Genre = "Biography",
                         CoverUrl = "https....",
                         DateAdded = DateTime.Now

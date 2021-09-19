@@ -36,11 +36,18 @@ namespace MyBooksLibrary.Controllers
             return Ok();
         }
 
-        [HttpPut]
+        [HttpPut("update-book-by-id/{id}")]
         public IActionResult UpdateBookById(int id, [FromBody]BookViewModel book)
         {
             var updatedBook = _booksService.UpdateBookById(id, book);
             return Ok(updatedBook);
+        }
+
+        [HttpDelete("delete-book-by-id/{id}")]
+        public IActionResult DeleteBookById(int id)
+        {
+            _booksService.DeleteBookById(id);
+            return Ok();
         }
     }
 }
