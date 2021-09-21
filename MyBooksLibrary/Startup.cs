@@ -9,6 +9,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using MyBooksLibrary.Data;
+using MyBooksLibrary.Data.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,6 +36,10 @@ namespace MyBooksLibrary
             services.AddControllers();
 
             services.AddDbContext<AppDbContext>(options => options.UseSqlServer(ConntectionString));
+
+            services.AddTransient<BookService>();
+            services.AddTransient<AuthorsService>();
+            services.AddTransient<PublishersService>();
 
             services.AddSwaggerGen(c =>
             {
@@ -63,7 +68,7 @@ namespace MyBooksLibrary
                 endpoints.MapControllers();
             });
 
-            AddDbInitializer.Seed(app);
+            //AddDbInitializer.Seed(app);
         }
     }
 }
