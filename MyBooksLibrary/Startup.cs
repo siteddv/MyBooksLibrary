@@ -68,7 +68,7 @@ namespace MyBooksLibrary
                 endpoints.MapControllers();
             });
 
-            //AddDbInitializer.Seed(app);
+            AddDbInitializer.Seed(app);
         }
     }
 }
