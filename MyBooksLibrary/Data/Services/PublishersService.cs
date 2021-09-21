@@ -24,34 +24,23 @@ namespace MyBooksLibrary.Data.Services
             _context.Publishers.Add(publisherModel);
             _context.SaveChanges();
         }
-        public List<Book> GetAllBooks() => _context.Books.ToList();
-        public Book GetBookById(int bookId) => _context.Books.FirstOrDefault(n => n.Id == bookId);
-        public Book UpdateBookById(int bookId, BookViewModel book)
+        
+        public PublisherWithBooksAndAuthorsViewModel GetPublisherDataById(int publisherId)
         {
-            var bookModel = _context.Books.FirstOrDefault(b => b.Id == bookId);
-            if (bookModel != null)
-            {
-                bookModel.Title = book.Title;
-                bookModel.Description = book.Description;
-                bookModel.IsRead = book.IsRead;
-                bookModel.DateRead = book.IsRead ? book.DateRead.Value : null;
-                bookModel.Rate = book.IsRead ? book.Rate : null;
-                bookModel.Genre = book.Genre;
-                bookModel.CoverUrl = book.CoverUrl;
+            var publisherData = _context.Publishers
+                .Where(publisher => publisher.Id == publisherId)
+                .Select(publisher => new PublisherWithBooksAndAuthorsViewModel()
+                {
+                    Name = publisher.Name,
+                    BookAuthors = publisher.Books.Select(book => new BookAuthorViewModel()
+                    {
+                        BookName = book.Title,
+                        BookAuthors = book.Book_Authors.Select(ba => ba.Author.FullName).ToList()
+                    }).ToList()
+                }).FirstOrDefault();
 
-                _context.SaveChanges();
-            }
+            return publisherData;
+        }
 
-            return bookModel;
-        }
-        public void DeleteBookById(int bookId)
-        {
-            var book = _context.Books.FirstOrDefault(b => b.Id == bookId);
-            if (book != null)
-            {
-                _context.Books.Remove(book);
-                _context.SaveChanges();
-            }
-        }
     }
 }

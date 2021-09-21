@@ -25,7 +25,9 @@ namespace MyBooksLibrary.Data.Services
 
         public AuthorWithBooksViewModel GetAuthorWithBooks(int authorId)
         {
-            var author = _context.Authors.Where(author => author.Id == authorId).Select(author => new AuthorWithBooksViewModel()
+            var author = _context.Authors
+                .Where(author => author.Id == authorId)
+                .Select(author => new AuthorWithBooksViewModel()
             {
                 FullName = author.FullName,
                 BookTitles = author.Book_Authors.Select(a => a.Book.Title).ToList()
