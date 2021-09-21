@@ -32,7 +32,7 @@ namespace MyBooksLibrary.Controllers
         [HttpPost("add-book")]
         public IActionResult AddBook([FromBody]BookViewModel book)
         {
-            _booksService.AddBook(book);
+            _booksService.AddBookWithAuthors(book);
             return Ok();
         }
 

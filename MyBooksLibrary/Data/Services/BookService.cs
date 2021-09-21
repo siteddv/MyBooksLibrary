@@ -15,7 +15,7 @@ namespace MyBooksLibrary.Data.Services
         {
             _context = context;
         }
-        public void AddBook(BookViewModel book)
+        public void AddBookWithAuthors(BookViewModel book)
         {
             var bookModel = new Book()
             {
@@ -25,12 +25,22 @@ namespace MyBooksLibrary.Data.Services
                 DateRead = book.IsRead ? book.DateRead.Value : null,
                 Rate = book.IsRead ? book.Rate : null,
                 Genre = book.Genre,
-                Author = book.Author,
                 CoverUrl = book.CoverUrl,
-                DateAdded = DateTime.Now
+                DateAdded = DateTime.Now,
+                PublisherId = book.PublisherId
             };
             _context.Books.Add(bookModel);
             _context.SaveChanges();
+            foreach(var authorId in book.AuthorIds)
+            {
+                var bookAuthor = new Book_Author()
+                {
+                    BookId = bookModel.Id,
+                    AuthorId = authorId
+                };
+                _context.Book_Authors.Add(bookAuthor);
+                _context.SaveChanges();
+            }
         }
         public List<Book> GetAllBooks() => _context.Books.ToList();
         public Book GetBookById(int bookId) => _context.Books.FirstOrDefault(n => n.Id == bookId);
@@ -45,7 +55,6 @@ namespace MyBooksLibrary.Data.Services
                 bookModel.DateRead = book.IsRead ? book.DateRead.Value : null;
                 bookModel.Rate = book.IsRead ? book.Rate : null;
                 bookModel.Genre = book.Genre;
-                bookModel.Author = book.Author;
                 bookModel.CoverUrl = book.CoverUrl;
 
                 _context.SaveChanges();

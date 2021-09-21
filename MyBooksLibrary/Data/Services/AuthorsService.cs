@@ -35,7 +35,6 @@ namespace MyBooksLibrary.Data.Services
                 bookModel.DateRead = book.IsRead ? book.DateRead.Value : null;
                 bookModel.Rate = book.IsRead ? book.Rate : null;
                 bookModel.Genre = book.Genre;
-                bookModel.Author = book.Author;
                 bookModel.CoverUrl = book.CoverUrl;
 
                 _context.SaveChanges();
