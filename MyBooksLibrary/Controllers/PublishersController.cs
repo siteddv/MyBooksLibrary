@@ -23,16 +23,33 @@ namespace MyBooksLibrary.Controllers
         [HttpPost("add-publisher")]
         public IActionResult AddPublisher([FromBody] PublisherViewModel publisher)
         {
-            _publishersService.AddPublisher(publisher);
-            return Ok();
+            var addedPublisher = _publishersService.AddPublisher(publisher);
+            return Created(nameof(AddPublisher), addedPublisher);
         }
 
-        [HttpGet("get-publisher-books-with-authors/{id}")]
-        public IActionResult GetPublisherData(int id)
+        [HttpGet("get-publisher-books-with-authors-by-id/{id}")]
+        public IActionResult GetPublisherDataById(int id)
         {
             var response = _publishersService.GetPublisherDataById(id);
 
             return Ok(response);
+        }
+
+        [HttpGet("get-publisher-by-id/{id}")]
+        public IActionResult GetPublisherById(int id)
+        {
+            var response = _publishersService.GetPublisherDataById(id);
+
+            if(response != null)
+            {
+                return Ok(response);
+            }
+            else
+            {
+                return NotFound();
+            }
+
+            
         }
 
         [HttpDelete("delete-publisher-by-id/{id}")]
