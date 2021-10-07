@@ -37,7 +37,6 @@ namespace MyBooksLibrary.Controllers
             {
                 return BadRequest(ex.Message);
             }
-            
         }
 
         [HttpGet("get-publisher-books-with-authors-by-id/{id}")]
@@ -51,6 +50,8 @@ namespace MyBooksLibrary.Controllers
         [HttpGet("get-publisher-by-id/{id}")]
         public IActionResult GetPublisherById(int id)
         {
+            throw new Exception("This is an exception that will be handled by middleware");
+
             var response = _publishersService.GetPublisherDataById(id);
 
             if(response != null)
@@ -61,8 +62,6 @@ namespace MyBooksLibrary.Controllers
             {
                 return NotFound();
             }
-
-            
         }
 
         [HttpDelete("delete-publisher-by-id/{id}")]
@@ -77,7 +76,6 @@ namespace MyBooksLibrary.Controllers
             {
                 return BadRequest(ex.Message);
             }
-            
         }
     }
 }

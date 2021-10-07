@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace MyBooksLibrary.Data.Services
 {
-    public class BookService
+    public class BookService 
     {
-        private AppDbContext _context;
+        private readonly AppDbContext _context;
 
         public BookService(AppDbContext context)
         {
