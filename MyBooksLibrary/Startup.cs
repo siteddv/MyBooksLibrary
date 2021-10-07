@@ -10,6 +10,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using MyBooksLibrary.Data;
 using MyBooksLibrary.Data.Services;
+using MyBooksLibrary.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
