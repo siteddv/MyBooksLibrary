@@ -65,6 +65,7 @@ namespace MyBooksLibrary
             app.UseAuthorization();
 
             app.ConfigureBuildInExceptionHandler();
+            /*app.ConfigureCustomExceptionHandler();*/
 
             app.UseEndpoints(endpoints =>
             {

@@ -50,8 +50,6 @@ namespace MyBooksLibrary.Controllers
         [HttpGet("get-publisher-by-id/{id}")]
         public IActionResult GetPublisherById(int id)
         {
-            throw new Exception("This is an exception that will be handled by middleware");
-
             var response = _publishersService.GetPublisherDataById(id);
 
             if(response != null)
