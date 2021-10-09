@@ -44,13 +44,20 @@ namespace MyBooksLibrary.Controllers
         {
             var response = _publishersService.GetPublisherDataById(id);
 
-            return Ok(response);
+            if (response != null)
+            {
+                return Ok(response);
+            }
+            else
+            {
+                return NotFound();
+            }
         }
 
         [HttpGet("get-publisher-by-id/{id}")]
         public IActionResult GetPublisherById(int id)
         {
-            var response = _publishersService.GetPublisherDataById(id);
+            var response = _publishersService.GetPublisherById(id);
 
             if(response != null)
             {
