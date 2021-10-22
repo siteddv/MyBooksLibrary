@@ -1,6 +1,5 @@
 ﻿using MyBooksLibrary.Data.Models;
 using MyBooksLibrary.Data.ViewModels;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace MyBooksLibrary.Data.Services

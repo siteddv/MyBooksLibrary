@@ -6,13 +6,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace MyBooksLibrary.Data.Services
 {
     public class PublishersService
     {
-        private AppDbContext _context;
+        private readonly AppDbContext _context;
 
         public PublishersService(AppDbContext context)
         {
@@ -83,7 +82,7 @@ namespace MyBooksLibrary.Data.Services
             }
             else
             {
-                throw new Exception($"The publisher with id: {id} doesn't exist");
+                throw new ArgumentNullException($"The publisher with id: {id} doesn't exist");
             }
         }
 
