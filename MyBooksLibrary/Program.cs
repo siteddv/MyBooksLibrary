@@ -18,10 +18,6 @@ namespace MyBooksLibrary
                 Log.Logger = new LoggerConfiguration()
                     .ReadFrom.Configuration(config)
                     .CreateLogger();
-                
-                /*Log.Logger = new LoggerConfiguration()
-                    .WriteTo.File("Logs/logs.txt", rollingInterval: RollingInterval.Day)
-                    .CreateLogger();*/
 
                 CreateHostBuilder(args).Build().Run();
             }
