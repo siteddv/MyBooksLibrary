@@ -19,9 +19,6 @@ namespace MyBooksLibrary.Data.Services
         }
         public Publisher AddPublisher(PublisherViewModel publisher)
         {
-            if (StringStartsWithNumber(publisher.Name))
-                throw new PublisherNameException("NameStartsWithNumber", publisher.Name);
-
             var publisherModel = new Publisher()
             {
                 Name = publisher.Name

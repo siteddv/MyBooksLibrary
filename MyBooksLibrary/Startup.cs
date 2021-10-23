@@ -35,6 +35,7 @@ namespace MyBooksLibrary
             services.AddTransient<BookService>();
             services.AddTransient<AuthorsService>();
             services.AddTransient<PublishersService>();
+            services.AddTransient<LogsService>();
 
             services.AddSwaggerGen(c =>
             {
@@ -59,7 +60,6 @@ namespace MyBooksLibrary
             app.UseAuthorization();
 
             app.ConfigureBuildInExceptionHandler(loggerFactory);
-            /*app.ConfigureCustomExceptionHandler();*/
 
             app.UseEndpoints(endpoints =>
             {

@@ -35,7 +35,7 @@ namespace MyBooksLibrary.Exceptions
             var response = new ErrorViewModel()
             {
                 StatusCode = httpContext.Response.StatusCode,
-                Message = "Internal Server Error is handled by custom middleware",
+                Message = ex.Message,
                 Path = "path"
             };
 

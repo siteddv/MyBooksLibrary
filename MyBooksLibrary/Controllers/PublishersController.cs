@@ -39,19 +39,9 @@ namespace MyBooksLibrary.Controllers
         [HttpPost("add-publisher")]
         public IActionResult AddPublisher([FromBody] PublisherViewModel publisher)
         {
-            try
-            {
-                var addedPublisher = _publishersService.AddPublisher(publisher);
-                return Created(nameof(AddPublisher), addedPublisher);
-            }
-            catch (PublisherNameException ex)
-            {
-                return BadRequest($"{ex.Message}, Publisher name: {publisher.Name}");
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            var addedPublisher = _publishersService.AddPublisher(publisher);
+            return Created(nameof(AddPublisher), addedPublisher);
+            
         }
 
         [HttpGet("get-publisher-books-with-authors-by-id/{id}")]
