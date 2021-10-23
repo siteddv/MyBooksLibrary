@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Serilog;
 
@@ -10,7 +11,17 @@ namespace MyBooksLibrary
         {
             try
             {
-                Log.Logger = new LoggerConfiguration().CreateLogger();
+                var config = new ConfigurationBuilder()
+                    .AddJsonFile("appsettings.json")
+                    .Build();
+
+                Log.Logger = new LoggerConfiguration()
+                    .ReadFrom.Configuration(config)
+                    .CreateLogger();
+                
+                /*Log.Logger = new LoggerConfiguration()
+                    .WriteTo.File("Logs/logs.txt", rollingInterval: RollingInterval.Day)
+                    .CreateLogger();*/
 
                 CreateHostBuilder(args).Build().Run();
             }
