@@ -1,9 +1,11 @@
 using Microsoft.EntityFrameworkCore;
 using MyBooksLibrary.Data;
 using MyBooksLibrary.Data.Models;
+using MyBooksLibrary.Data.Services;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace MyBooksTests
 {
@@ -14,12 +16,15 @@ namespace MyBooksTests
             .Options;
 
         private AppDbContext _context;
+        private PublishersService _publishersService;
 
         [OneTimeSetUp]
         public void Setup()
         {
             _context = new AppDbContext(dbContextOptions);
             _context.Database.EnsureCreated();
+
+            _publishersService = new PublishersService(_context);
 
             SeedDatabase();
         }
@@ -29,6 +34,41 @@ namespace MyBooksTests
         {
             _context.Database.EnsureDeleted();
         }
+
+        [Test, Order(1)]
+        public void GetAllPublishersWithEmptyParams()
+        {
+            var result = _publishersService.GetAllPublishers("", "", null);
+
+            Assert.That(result.Count, Is.EqualTo(5));
+            Assert.AreEqual(5, result.Count);
+        }
+
+        [Test, Order(2)]
+        public void GetAllPublishersSecPage()
+        {
+            var result = _publishersService.GetAllPublishers("", "", 2);
+
+            Assert.That(result.Count, Is.EqualTo(1));
+            Assert.AreEqual(1, result.Count);
+        }
+
+        [Test, Order(3)]
+        public void GetAllPublishersWithSearch()
+        {
+            var result = _publishersService.GetAllPublishers("", "3", null);
+
+            Assert.AreEqual("Publisher 3", result.FirstOrDefault().Name);
+        }
+
+        [Test, Order(4)]
+        public void GetAllPublishersWithSort()
+        {
+            var result = _publishersService.GetAllPublishers("name_desc", "", null);
+
+            Assert.AreEqual("Publisher 6", result.FirstOrDefault().Name);
+        }
+
 
         private void SeedDatabase()
         {

@@ -43,7 +43,7 @@ namespace MyBooksLibrary.Data.Services
                 allPublishers = allPublishers.Where(p => p.Name.ToLower().Contains(searchString)).ToList();
             }
 
-            int pageSize = 2;
+            int pageSize = 5;
             allPublishers = PaginatedList<Publisher>.Create(allPublishers.AsQueryable(), pageNumber ?? 1, pageSize);
             
             return allPublishers;
