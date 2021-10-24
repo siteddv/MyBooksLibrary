@@ -17,6 +17,7 @@ namespace MyBooksLibrary.Data.Services
         {
             _context = context;
         }
+
         public Publisher AddPublisher(PublisherViewModel publisher)
         {
             var publisherModel = new Publisher()
@@ -82,7 +83,5 @@ namespace MyBooksLibrary.Data.Services
                 throw new ArgumentNullException($"The publisher with id: {id} doesn't exist");
             }
         }
-
-        private bool StringStartsWithNumber(string number) => Regex.IsMatch(number, @"^\d");
     }
 }

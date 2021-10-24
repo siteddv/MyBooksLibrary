@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using MyBooksLibrary.Data;
 using MyBooksLibrary.Data.Models;
 using MyBooksLibrary.Data.Services;
+using MyBooksLibrary.Data.ViewModels;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
@@ -92,6 +93,19 @@ namespace MyBooksTests
             var result = _publishersService.GetPublisherById(-10);
 
             Assert.AreEqual(null, result);
+        }
+
+        [Test, Order(8)]
+        public void AddPublisher_Test()
+        {
+            var publisher = new PublisherViewModel()
+            {
+                Name = "Ok"
+            };
+
+            var result = _publishersService.AddPublisher(publisher);
+
+            Assert.AreEqual(result.Name, publisher.Name);
         }
 
         private void SeedDatabase()
