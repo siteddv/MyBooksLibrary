@@ -69,6 +69,30 @@ namespace MyBooksTests
             Assert.AreEqual("Publisher 6", result.FirstOrDefault().Name);
         }
 
+        [Test, Order(5)]
+        public void GetPublisherByIdCorrect()
+        {
+            var result = _publishersService.GetPublisherById(1);
+
+            Assert.AreNotEqual(null, result);
+            Assert.AreEqual(1, result.Id);
+        }
+
+        [Test, Order(6)]
+        public void GetPublisherByIdIncorrect()
+        {
+            var result = _publishersService.GetPublisherById(10);
+
+            Assert.AreEqual(null, result);
+        }
+
+        [Test, Order(7)]
+        public void GetPublisherByIdNegative()
+        {
+            var result = _publishersService.GetPublisherById(-10);
+
+            Assert.AreEqual(null, result);
+        }
 
         private void SeedDatabase()
         {
